@@ -27,7 +27,16 @@ def aplicastemmer(texto):
     frasesstemming = []
     for (palavras) in texto:
         comstemming = [str(stemmer.stem(p)) for p in palavras.split() if (p.lower() not in stopwordsnltk and p.replace('.','',1).isdigit() == False and  p.replace(',','',1).isdigit() == False and  p.replace('/','',1).isdigit() == False and  p.replace('x','',1).isdigit() == False and  p.replace('X','',1).isdigit() == False and len(p)!= 1)]
-        frasesstemming.append((comstemming, 'match'))
+        frasesstemming.append((comstemming))
     return frasesstemming
 
-print(aplicastemmer(c))
+base_com_stemmer = aplicastemmer(c)
+#print(base_com_stemmer)
+
+def buscapalavras(frases):
+    total = []
+    for i in frases:
+        total += i
+    return total
+
+print(buscapalavras(base_com_stemmer))

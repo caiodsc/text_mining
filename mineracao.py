@@ -39,4 +39,17 @@ def buscapalavras(frases):
         total += i
     return total
 
-print(buscapalavras(base_com_stemmer))
+all_words = buscapalavras(base_com_stemmer)
+
+def buscafrequencia(palavras):
+    palavras = nltk.FreqDist(palavras)
+    return palavras
+
+frequencia = buscafrequencia(all_words)
+print(frequencia.most_common())
+
+def buscapalavrasunicas(frequencia):
+    freq = frequencia.keys()
+    return freq
+
+print(buscapalavrasunicas(frequencia))

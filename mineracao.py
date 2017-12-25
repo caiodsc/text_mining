@@ -20,4 +20,14 @@ def removestopwords(texto):
         semstop = [p.lower() for p in palavras.split() if (p.lower() not in stopwordsnltk and p.replace('.','',1).isdigit() == False and  p.replace(',','',1).isdigit() == False and  p.replace('/','',1).isdigit() == False and  p.replace('x','',1).isdigit() == False and  p.replace('X','',1).isdigit() == False and len(p)!= 1)]
         frases.append((semstop,  'match'))
     return frases
-print(removestopwords(c))
+#semsw = removestopwords(c)
+
+def aplicastemmer(texto):
+    stemmer = nltk.stem.RSLPStemmer()
+    frasesstemming = []
+    for (palavras) in texto:
+        comstemming = [str(stemmer.stem(p)) for p in palavras.split() if (p.lower() not in stopwordsnltk and p.replace('.','',1).isdigit() == False and  p.replace(',','',1).isdigit() == False and  p.replace('/','',1).isdigit() == False and  p.replace('x','',1).isdigit() == False and  p.replace('X','',1).isdigit() == False and len(p)!= 1)]
+        frasesstemming.append((comstemming, 'match'))
+    return frasesstemming
+
+print(aplicastemmer(c))

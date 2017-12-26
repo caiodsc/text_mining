@@ -46,10 +46,22 @@ def buscafrequencia(palavras):
     return palavras
 
 frequencia = buscafrequencia(all_words)
-print(frequencia.most_common())
+#print(frequencia.most_common())
 
 def buscapalavrasunicas(frequencia):
     freq = frequencia.keys()
     return freq
 
-print(buscapalavrasunicas(frequencia))
+palavrasunicas = buscapalavrasunicas(frequencia)
+
+
+def extratorpalavras(documento):
+    doc = set(documento)
+    caracteristicas = {}
+    for palavras in palavrasunicas:
+        caracteristicas['%s' % palavras] = (palavras in doc)
+    return caracteristicas
+
+caracteristicasfrase = (extratorpalavras(['am', 'nov', 'dia']))
+
+print(caracteristicasfrase)

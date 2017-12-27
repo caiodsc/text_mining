@@ -82,10 +82,18 @@ basecompleta = nltk.classify.apply_features(extratorpalavras, base_com_stemmer2)
 classificador = nltk.NaiveBayesClassifier.train(basecompleta)
 print(classificador.show_most_informative_features())
 
-teste = 'estou com medo'
+teste = 'Bicicleta Caloi Ceci Aro 24 Aco Carbono 21 Marchas Branca'
 testestemming = []
 stemmer = nltk.stem.RSLPStemmer()
 for palavras in teste.split():
     comstem = [p for p in palavras.split()]
     testestemming.append(str(stemmer.stem(comstem[0])))
 print(testestemming)
+
+novo = extratorpalavras(testestemming)
+print(novo)
+print(classificador.classify(novo))
+
+distribuicao = classificador.prob_classify(novo)
+for classe in distribuicao.samples():
+    print("%s: %f" %(classe, distribuicao.prob(classe)))

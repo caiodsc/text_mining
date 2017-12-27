@@ -82,3 +82,10 @@ basecompleta = nltk.classify.apply_features(extratorpalavras, base_com_stemmer2)
 classificador = nltk.NaiveBayesClassifier.train(basecompleta)
 print(classificador.show_most_informative_features())
 
+teste = 'estou com medo'
+testestemming = []
+stemmer = nltk.stem.RSLPStemmer()
+for palavras in teste.split():
+    comstem = [p for p in palavras.split()]
+    testestemming.append(str(stemmer.stem(comstem[0])))
+print(testestemming)

@@ -31,6 +31,16 @@ def aplicastemmer(texto):
     return frasesstemming
 
 base_com_stemmer = aplicastemmer(c)
+
+def aplicastemmer2(texto):
+    stemmer = nltk.stem.RSLPStemmer()
+    frasesstemming = []
+    for (palavras) in texto:
+        comstemming = [str(stemmer.stem(p)) for p in palavras.split() if (p.lower() not in stopwordsnltk and p.replace('.','',1).isdigit() == False and  p.replace(',','',1).isdigit() == False and  p.replace('/','',1).isdigit() == False and  p.replace('x','',1).isdigit() == False and  p.replace('X','',1).isdigit() == False and len(p)!= 1)]
+        frasesstemming.append((comstemming, 'match'))
+    return frasesstemming
+
+base_com_stemmer2 = aplicastemmer2(c)
 #print(base_com_stemmer)
 
 def buscapalavras(frases):
@@ -62,6 +72,13 @@ def extratorpalavras(documento):
         caracteristicas['%s' % palavras] = (palavras in doc)
     return caracteristicas
 
-caracteristicasfrase = (extratorpalavras(['am', 'nov', 'dia']))
+caracteristicasfrase = (extratorpalavras(['biciclet', 'nov', 'dia']))
 
-print(caracteristicasfrase)
+#print(caracteristicasfrase)
+#print(base_com_stemmer2)
+basecompleta = nltk.classify.apply_features(extratorpalavras, base_com_stemmer2)
+#print(basecompleta)
+
+classificador = nltk.NaiveBayesClassifier.train(basecompleta)
+print(classificador.show_most_informative_features())
+
